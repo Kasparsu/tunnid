@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessagePosted;
 use App\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,5 +24,6 @@ class ChatController extends Controller
     public function addMessage(Request $request) {
         $message = new Message($request->all());
         $message->save();
+        broadcast(new MessagePosted($message))->toOthers();
     }
 }
