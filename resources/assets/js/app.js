@@ -17,7 +17,22 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('list', require('./components/List.vue'));
+Vue.component('chat', require('./components/Chat.vue'));
+Vue.component('message', require('./components/Message.vue'));
+Vue.component('chat-log', require('./components/ChatLog.vue'));
+Vue.component('chat-composer', require('./components/ChatComposer.vue'));
+Vue.component('login', require('./components/Login.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data(){
+       return {
+           username: window.user
+       }
+    },
+    methods: {
+        setUser(user){
+            this.username = user;
+        }
+}
 });

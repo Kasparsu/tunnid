@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 
 use App\ListElement;
 use Illuminate\Http\Request;
+use Swagger\Client\Api\DeckApi;
 
 class ApiController extends Controller
 {
@@ -18,7 +19,7 @@ class ApiController extends Controller
         return view('welcome');
     }
     public function getList(){
-        $list = ListElement::all()->pluck('element');
+        $list = ListElement::all()->pluck('element', 'id');
         return $list;
     }
     public function addToList(Request $request){
@@ -26,5 +27,16 @@ class ApiController extends Controller
         $element = new ListElement($getParams);
         $element->save();
         var_dump($element);
+        config('app.name');
+    }
+
+    public function removeFromList($id) {
+        $element = ListElement::find($id);
+        $element->delete();
+    }
+    public function cards(){
+        $cardApi = new DeckApi();
+        $newDeck = $cardApi->shuffleTheCards(null, 1);
+        var_dump($newDeck->getDeckId());
     }
 }

@@ -8,7 +8,7 @@ class ListElement extends Model
 {
    public $table = 'list';
    public $fillable = [
-        'element',
+       'element',
        'type'
    ];
 }

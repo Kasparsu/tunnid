@@ -1,6 +1,6 @@
 <template>
     <ul>
-        <li v-for="item in orderedList">{{item}}</li>
+        <li v-for="(item, id) in data">{{item}} <a href="" @click.prevent="deleteItem(id)">delete</a></li>
         <input v-model="input" type="text"/>
         <button @click="addItem">add item</button>
     </ul>
@@ -18,14 +18,11 @@
         },
         data() {
             return {
-                data: [],
+                data: {},
                 input: ''
             }
         },
         computed: {
-            orderedList(){
-                return this.data.sort();
-            }
         },
         methods: {
             addItem(){
@@ -40,6 +37,16 @@
                     vm.data.push(vm.input);
                     vm.input = '';
 
+                })
+            },
+            deleteItem(id){
+                var vm = this;
+                axios.get('/delete/' + id).then(function (response) {
+                    console.log(vm.data[id]);
+                    var temp = vm.data;
+                    delete temp[id];
+                    vm.data = temp;
+                    console.log(vm.data[id]);
                 })
             }
         }

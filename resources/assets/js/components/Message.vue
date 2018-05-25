@@ -1,27 +1,27 @@
 <template>
+    <li>
+        <p>{{message.message}}</p>
+        <small>{{message.user}}</small>
+    </li>
 
 </template>
 
 <script>
     export default {
+        props: ['message'],
         mounted() {
-            console.log("hello");
+
         },
         data() {
             return {
-                name: 'Kaspar',
-                lastname: 'Suursalu',
+
             }
         },
         computed: {
-            fullname(){
-                return this.name + ' ' + this.lastname;
-            }
+
         },
         methods: {
-            changeName(){
 
-            }
         }
     }
 </script>
